@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+runCommands() {
+    if [[ "${1}" == "dependencies" ]]; then
+        dependencies
+    elif [[ "${1}" == "start" ]]; then
+        start
+    elif [[ "${1}" == "start-frontend" ]]; then
+        start-frontend
+    elif [[ "${1}" == "start-backend" ]]; then
+        start-backend
+    else
+        echo "Invalid command"
+    fi
+}
+
+dependencies() {
+    cd backend
+    echo "Installing backend dependencies..."
+    docker compose up --detach
+}
+
+start-frontend() {
+    echo "Starting frontend..."
+    cd frontend
+    npm install
+    npm run dev
+}
+
+start-backend() {
+    echo "Starting backend..."
+    cd backend
+    npm install
+    npm run dev
+}
+
+start() {
+    start-backend &
+    start-frontend
+}
+
+runCommands "${@}"

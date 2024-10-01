@@ -1,0 +1,11 @@
+{
+  "name": "chat-app",
+  "version": "1.0.0",
+  "description": "This is an end-to-end encrypted chat app that uses the Signal Protocol to secure messages.",
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": "20"
+  }
+}
