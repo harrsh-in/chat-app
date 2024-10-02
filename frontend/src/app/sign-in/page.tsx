@@ -1,11 +1,11 @@
 import { Box, Typography } from '@mui/material';
 
-const Login = () => {
+const SignIn = () => {
     return (
         <Box>
-            <Typography variant="h4">Login</Typography>
+            <Typography variant="h4">SignIn</Typography>
         </Box>
     );
 };
 
-export default Login;
+export default SignIn;

@@ -1,9 +1,11 @@
+import { get } from 'lodash';
 import { NextRequest, NextResponse } from 'next/server';
 
 export function middleware(req: NextRequest) {
-    const token = req.cookies.get('authToken')?.value;
+    const tokenCookie = req.cookies.get('authToken');
+    const token = get(tokenCookie, 'value');
 
-    const publicPaths = ['/login', '/register', '/forgot-password'];
+    const publicPaths = ['/sign-in', '/sign-up', '/forgot-password'];
     const isPublicPath = publicPaths.includes(req.nextUrl.pathname);
 
     if (token && isPublicPath) {
@@ -11,7 +13,7 @@ export function middleware(req: NextRequest) {
     }
 
     if (!token && !isPublicPath) {
-        return NextResponse.redirect(new URL('/login', req.url));
+        return NextResponse.redirect(new URL('/sign-in', req.url));
     }
 
     return NextResponse.next();

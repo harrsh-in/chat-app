@@ -10,7 +10,7 @@ import {
     useEffect,
     useState,
 } from 'react';
-import { getTheme } from '.';
+import { getTheme } from '../theme';
 
 interface ThemeContextProps {
     toggleTheme: () => void;

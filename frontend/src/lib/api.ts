@@ -30,7 +30,7 @@ axios.interceptors.response.use(
                 toast.error(message);
             }
             if (typeof window !== 'undefined') {
-                window.location.href = '/login';
+                window.location.href = '/sign-in';
             }
         }
         return Promise.reject(error);

@@ -1,4 +1,5 @@
-import { ThemeContextProvider } from '@/theme/themeContext';
+import { ClientProvider } from '@/contexts/reactQueryContext';
+import { ThemeContextProvider } from '@/contexts/themeContext';
 import { Container } from '@mui/material';
 import type { Metadata } from 'next';
 import { ToastContainer } from 'react-toastify';
@@ -21,7 +22,9 @@ export default function RootLayout({
                 <ThemeContextProvider>
                     <ToastContainer stacked closeOnClick />
 
-                    <Container>{children}</Container>
+                    <ClientProvider>
+                        <Container>{children}</Container>
+                    </ClientProvider>
                 </ThemeContextProvider>
             </body>
         </html>
