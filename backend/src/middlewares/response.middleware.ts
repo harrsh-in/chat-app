@@ -28,32 +28,32 @@ const responseMiddleware: Koa.Middleware = async (ctx, next) => {
         };
 
         ctx.body = formattedResponse;
-    } catch (err) {
+    } catch (error) {
         let errorResponse: FormattedResponse;
         let statusCode: number = 400;
 
-        if (err instanceof ZodError) {
-            logger.error('Validation error:', err.errors);
+        if (error instanceof ZodError) {
+            logger.error('Validation error:', error.errors);
             errorResponse = {
                 status: false,
-                message: err.errors[0].message,
+                message: error.errors[0].message,
                 data: {
-                    errors: err.errors.map((e) => ({
+                    errors: error.errors.map((e) => ({
                         path: e.path.join('.'),
                         message: e.message,
                     })),
                 },
             };
-        } else if (err instanceof HttpError) {
-            logger.error('HTTP error:', err);
-            statusCode = err.statusCode;
+        } else if (error instanceof HttpError) {
+            logger.error('HTTP error:', error);
+            statusCode = error.statusCode;
             errorResponse = {
                 status: false,
-                message: err.message,
+                message: error.message,
                 data: {},
             };
         } else {
-            logger.error('Unexpected error:', err);
+            logger.error('Unexpected error:', error);
             statusCode = 500;
             errorResponse = {
                 status: false,
@@ -65,7 +65,7 @@ const responseMiddleware: Koa.Middleware = async (ctx, next) => {
         ctx.status = statusCode;
         ctx.body = errorResponse;
 
-        ctx.app.emit('error', err, ctx);
+        ctx.app.emit('error', error, ctx);
     }
 };
 

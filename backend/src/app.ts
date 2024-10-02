@@ -5,7 +5,7 @@ import compress from 'koa-compress';
 import helmet from 'koa-helmet';
 import logger from 'koa-logger';
 import { corsOrigin, nodeEnv } from './config';
-import responseMiddleware from './middlewares/responseMiddleware';
+import responseMiddleware from './middlewares/response.middleware';
 import router from './routes';
 import winston from './utils/logger';
 
