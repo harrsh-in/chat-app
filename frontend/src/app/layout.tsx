@@ -23,7 +23,9 @@ export default function RootLayout({
                     <ToastContainer stacked closeOnClick />
 
                     <ClientProvider>
-                        <Container>{children}</Container>
+                        <Container className="main-container">
+                            {children}
+                        </Container>
                     </ClientProvider>
                 </ThemeContextProvider>
             </body>

@@ -19,5 +19,11 @@ const getEnv = (
 export const nodeEnv = getEnv('NODE_ENV', {
     defaultValue: 'development',
 });
-export const apiBaseUrl = getEnv('NEXT_PUBLIC_API_BASE_URL');
-export const apiPrefix = getEnv('NEXT_PUBLIC_API_PREFIX');
+export const apiBaseUrl =
+    getEnv('NEXT_PUBLIC_API_BASE_URL', {
+        defaultValue: ' ',
+    }) || getEnv('API_BASE_URL');
+export const apiPrefix =
+    getEnv('NEXT_PUBLIC_API_PREFIX', {
+        defaultValue: ' ',
+    }) || getEnv('API_PREFIX');

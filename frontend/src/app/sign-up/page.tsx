@@ -1,11 +1,26 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
+import SignupForm from './signup-form';
+import axios from '@/lib/api';
 
-const SignUp = () => {
+const SignUp = async () => {
+    await pingServer();
     return (
-        <Box>
-            <Typography variant="h4">SignUp</Typography>
+        <Box
+            sx={{
+                padding: 2,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100%',
+            }}
+        >
+            <SignupForm />
         </Box>
     );
 };
 
 export default SignUp;
+
+const pingServer = async () => {
+    return await axios.get('/ping');
+};

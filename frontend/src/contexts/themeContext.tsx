@@ -30,7 +30,7 @@ export const useThemeContext = () => {
 };
 
 export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
-    const [mode, setMode] = useState<'light' | 'dark'>('light');
+    const [mode, setMode] = useState<'light' | 'dark'>();
 
     useEffect(() => {
         const savedTheme = localStorage.getItem('theme') as 'light' | 'dark';
@@ -45,6 +45,10 @@ export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
         localStorage.setItem('theme', newMode);
     };
 
+    if (!mode) {
+        return null;
+    }
+
     return (
         <ThemeContext.Provider value={{ toggleTheme, mode }}>
             <AppRouterCacheProvider
@@ -52,7 +56,7 @@ export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
                     enableCssLayer: true,
                 }}
             >
-                <ThemeProvider theme={getTheme('dark')}>
+                <ThemeProvider theme={getTheme(mode)}>
                     <CssBaseline />
                     {children}
                 </ThemeProvider>
