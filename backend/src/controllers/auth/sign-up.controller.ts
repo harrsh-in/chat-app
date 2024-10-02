@@ -6,11 +6,12 @@ import { prisma } from '../../utils/prisma';
 
 const signUpController = async (ctx: Context) => {
     try {
-        const body = ctx.request.body as signUpBodyType;
+        const { username, password, publicKey, privateKey } = ctx.request
+            .body as signUpBodyType;
 
         const existingUser = await prisma.user.findUnique({
             where: {
-                username: body.username,
+                username,
             },
         });
         if (existingUser) {
@@ -18,15 +19,15 @@ const signUpController = async (ctx: Context) => {
         }
 
         const hashedPassword = await hashValue({
-            text: body.password,
+            text: password,
         });
 
         await prisma.user.create({
             data: {
-                username: body.username,
+                username,
                 hashed_password: hashedPassword,
-                public_key: body.publicKey,
-                encrypted_private_key: body.privateKey,
+                public_key: publicKey,
+                encrypted_private_key: privateKey,
             },
         });
 
