@@ -1,23 +1,15 @@
+import pingController from '@/controllers/ping.controller';
+import testAuthController from '@/controllers/test-auth.controller';
+import testErrorController from '@/controllers/test-error.controller';
 import authMiddleware from '@/middlewares/auth';
 import Router from '@koa/router';
 
 const router = new Router();
 
-router.get('/', (ctx) => {
-    ctx.body = {
-        message: 'Welcome to the API',
-    };
-});
+router.get('/', pingController);
 
-router.get('/protected', authMiddleware, (ctx) => {
-    ctx.body = {
-        message: 'This is a protected route',
-        user: ctx.state.user,
-    };
-});
+router.get('/test-auth', authMiddleware, testAuthController);
 
-router.get('/error-test', (ctx) => {
-    ctx.throw(401, 'Test error');
-});
+router.get('/test-error', testErrorController);
 
 export default router;
