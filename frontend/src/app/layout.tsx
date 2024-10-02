@@ -1,4 +1,5 @@
 import { ThemeContextProvider } from '@/theme/themeContext';
+import { Container } from '@mui/material';
 import type { Metadata } from 'next';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -19,7 +20,8 @@ export default function RootLayout({
             <body>
                 <ThemeContextProvider>
                     <ToastContainer stacked closeOnClick />
-                    {children}
+
+                    <Container>{children}</Container>
                 </ThemeContextProvider>
             </body>
         </html>

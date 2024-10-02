@@ -1,13 +1,13 @@
 import axios from '@/lib/api';
-import { Container, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 const Home = async () => {
     await pingServer();
 
     return (
-        <Container>
+        <Box>
             <Typography variant="body1">Hello, World!</Typography>
-        </Container>
+        </Box>
     );
 };
 
