@@ -18,7 +18,7 @@ export default function RootLayout({
         <html lang="en">
             <body>
                 <ThemeContextProvider>
-                    <ToastContainer />
+                    <ToastContainer stacked closeOnClick />
                     {children}
                 </ThemeContextProvider>
             </body>
