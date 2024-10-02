@@ -1,5 +1,5 @@
-import config from '@/config';
-import { ApiResponse, ErrorResponseBody, HttpError, isErrorBody } from '@/types/api';
+import config from '../config';
+import { ApiResponse, ErrorResponseBody, HttpError, isErrorBody } from '../types/api';
 import { Context, Next } from 'koa';
 
 export default async (ctx: Context, next: Next): Promise<void> => {

@@ -1,8 +1,3 @@
-import config from '@/config';
-import httpLogger from '@/middlewares/httpLogger';
-import responseHandler from '@/middlewares/responseHandler';
-import router from '@/routes';
-import logger from '@/utils/logger';
 import cors from '@koa/cors';
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
@@ -10,23 +5,13 @@ import compress from 'koa-compress';
 import helmet from 'koa-helmet';
 import rateLimit from 'koa-ratelimit';
 import { v4 as uuidv4 } from 'uuid';
+import config from './config';
+import httpLogger from './middlewares/httpLogger';
+import responseHandler from './middlewares/responseHandler';
+import router from './routes';
+import logger from './utils/logger';
 
 const app = new Koa();
-
-// Request ID middleware
-app.use(async (ctx, next) => {
-    ctx.state.requestId = ctx.get('X-Request-ID') || uuidv4();
-    ctx.set('X-Request-ID', ctx.state.requestId);
-    await next();
-});
-
-// Logging middleware
-app.use(async (ctx, next) => {
-    ctx.logger = logger.child({
-        requestId: ctx.state.requestId,
-    });
-    await next();
-});
 
 // Security middleware
 app.use(
@@ -81,6 +66,21 @@ app.use(
     })
 );
 app.use(compress());
+
+// Request ID middleware
+app.use(async (ctx, next) => {
+    ctx.state.requestId = ctx.get('X-Request-ID') || uuidv4();
+    ctx.set('X-Request-ID', ctx.state.requestId);
+    await next();
+});
+
+// Logging middleware
+app.use(async (ctx, next) => {
+    ctx.logger = logger.child({
+        requestId: ctx.state.requestId,
+    });
+    await next();
+});
 
 // Logging and response handling
 app.use(httpLogger);

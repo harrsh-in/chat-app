@@ -1,4 +1,4 @@
-import { logHTTP } from '@/utils/logger';
+import { logHTTP } from '../utils/logger';
 import { Context, Next } from 'koa';
 
 export default async (ctx: Context, next: Next): Promise<void> => {

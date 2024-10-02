@@ -1,8 +1,8 @@
 import http from 'http';
-import app from '@/app';
-import config from '@/config';
-import { connectDatabase, prisma } from '@/utils/database';
-import logger from '@/utils/logger';
+import app from './app';
+import config from './config';
+import { connectDatabase, prisma } from './utils/database';
+import logger from './utils/logger';
 
 let server: http.Server;
 

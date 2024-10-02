@@ -1,4 +1,4 @@
-import config from '@/config';
+import config from '../config';
 import { Request } from 'koa';
 import winston from 'winston';
 
